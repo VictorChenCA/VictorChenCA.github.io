@@ -2,22 +2,23 @@ let userConfig = undefined;
 try {
     userConfig = await import("./v0-user-next.config");
 } catch (e) {
-    // ignore error
+    // Ignore error if the user config file doesn't exist
+    console.warn("User config not found, using default settings.");
 }
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    output: "export",
-    basePath: "/VictorChenCA.github.io",
-    assetPrefix: "/VictorChenCA.github.io",
+    output: "export",  // Ensures static export for GitHub Pages
+    basePath: "/VictorChenCA.github.io",  // Correct base path
+    assetPrefix: "/VictorChenCA.github.io/",  // Ensure trailing slash
     images: {
-        unoptimized: true,
+        unoptimized: true,  // Required for static exports
     },
     eslint: {
-        ignoreDuringBuilds: true,
+        ignoreDuringBuilds: true,  // Prevents ESLint from failing builds
     },
     typescript: {
-        ignoreBuildErrors: true,
+        ignoreBuildErrors: true,  // Prevents TypeScript from failing builds
     },
     experimental: {
         webpackBuildWorker: true,
@@ -26,16 +27,18 @@ const nextConfig = {
     },
 };
 
+// Merge user-defined configuration without overriding required settings
 function mergeConfig(nextConfig, userConfig) {
     if (!userConfig) {
         return nextConfig;
     }
 
     for (const key in userConfig) {
-        if (
-            typeof nextConfig[key] === "object" &&
-            !Array.isArray(nextConfig[key])
-        ) {
+        if (key === "output") {
+            console.warn(`Ignoring userConfig['output']: Next.js must use "export" for GitHub Pages.`);
+            continue;
+        }
+        if (typeof nextConfig[key] === "object" && !Array.isArray(nextConfig[key])) {
             nextConfig[key] = {
                 ...nextConfig[key],
                 ...userConfig[key],
