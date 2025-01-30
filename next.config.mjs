@@ -2,23 +2,22 @@ let userConfig = undefined;
 try {
     userConfig = await import("./v0-user-next.config");
 } catch (e) {
-    // Ignore error if the user config file doesn't exist
     console.warn("User config not found, using default settings.");
 }
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    output: "export",  // Ensures static export for GitHub Pages
-    basePath: "/VictorChenCA.github.io",  // Correct base path
+    output: "export",  // Required for GitHub Pages
+    basePath: "/VictorChenCA.github.io",
     assetPrefix: "/VictorChenCA.github.io/",  // Ensure trailing slash
     images: {
-        unoptimized: true,  // Required for static exports
+        unoptimized: true,  // Should be at the root level, not under experimental
     },
     eslint: {
-        ignoreDuringBuilds: true,  // Prevents ESLint from failing builds
+        ignoreDuringBuilds: true,
     },
     typescript: {
-        ignoreBuildErrors: true,  // Prevents TypeScript from failing builds
+        ignoreBuildErrors: true,
     },
     experimental: {
         webpackBuildWorker: true,
@@ -27,7 +26,6 @@ const nextConfig = {
     },
 };
 
-// Merge user-defined configuration without overriding required settings
 function mergeConfig(nextConfig, userConfig) {
     if (!userConfig) {
         return nextConfig;
