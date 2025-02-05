@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     output: "export",  // Required for GitHub Pages
-    basePath: "/VictorChenCA.github.io",  // Ensure correct subdirectory
-    assetPrefix: "/VictorChenCA.github.io/",  // Fix asset paths
+    basePath: "",  // Ensure correct subdirectory
+    assetPrefix: "/",  // Fix asset paths
     trailingSlash: true,  // Ensures proper routing
     images: {
         unoptimized: true,  // Required for static export
