@@ -8,8 +8,8 @@ try {
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     output: "export",  // Required for GitHub Pages
-    basePath: "/VictorChenCA.github.io",
-    assetPrefix: "/VictorChenCA.github.io/",  // Ensure trailing slash
+    basePath: "",
+    assetPrefix: "./",  // Ensure trailing slash
     images: {
         unoptimized: true,  // Should be at the root level, not under experimental
     },
