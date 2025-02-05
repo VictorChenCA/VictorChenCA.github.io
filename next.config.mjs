@@ -1,18 +1,11 @@
-let userConfig = undefined;
-try {
-    userConfig = await import("./v0-user-next.config");
-} catch (e) {
-    console.warn("User config not found, using default settings.");
-}
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     output: "export",  // Required for GitHub Pages
-    basePath: "/VictorChenCA.github.io",
-    assetPrefix: "/VictorChenCA.github.io/",
-    trailingSlash: true,  // Ensures correct routing
+    basePath: "/VictorChenCA.github.io",  // Ensure correct subdirectory
+    assetPrefix: "/VictorChenCA.github.io/",  // Fix asset paths
+    trailingSlash: true,  // Ensures proper routing
     images: {
-        unoptimized: true,
+        unoptimized: true,  // Required for static export
     },
     eslint: {
         ignoreDuringBuilds: true,
@@ -27,26 +20,4 @@ const nextConfig = {
     },
 };
 
-function mergeConfig(nextConfig, userConfig) {
-    if (!userConfig) {
-        return nextConfig;
-    }
-
-    for (const key in userConfig) {
-        if (key === "output") {
-            console.warn(`Ignoring userConfig['output']: Next.js must use "export" for GitHub Pages.`);
-            continue;
-        }
-        if (typeof nextConfig[key] === "object" && !Array.isArray(nextConfig[key])) {
-            nextConfig[key] = {
-                ...nextConfig[key],
-                ...userConfig[key],
-            };
-        } else {
-            nextConfig[key] = userConfig[key];
-        }
-    }
-    return nextConfig;
-}
-
-export default mergeConfig(nextConfig, userConfig);
+export default nextConfig;
