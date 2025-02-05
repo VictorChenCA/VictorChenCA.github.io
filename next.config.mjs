@@ -8,10 +8,11 @@ try {
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     output: "export",  // Required for GitHub Pages
-    basePath: "",
-    assetPrefix: "/",  // Ensure trailing slash
+    basePath: "/VictorChenCA.github.io",
+    assetPrefix: "/VictorChenCA.github.io/",
+    trailingSlash: true,  // Ensures correct routing
     images: {
-        unoptimized: true,  // Should be at the root level, not under experimental
+        unoptimized: true,
     },
     eslint: {
         ignoreDuringBuilds: true,
