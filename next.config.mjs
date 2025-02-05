@@ -1,22 +1,10 @@
-/** @type {import('next').NextConfig} */
 const nextConfig = {
     output: "export",  // Required for GitHub Pages
-    basePath: "",  // Ensure correct subdirectory
-    assetPrefix: "/",  // Fix asset paths
-    trailingSlash: true,  // Ensures proper routing
+    basePath: "",  // Set to an empty string to avoid incorrect subdirectory issues
+    assetPrefix: "/",  // Ensures relative asset paths
+    trailingSlash: true,  // Helps with proper routing
     images: {
         unoptimized: true,  // Required for static export
-    },
-    eslint: {
-        ignoreDuringBuilds: true,
-    },
-    typescript: {
-        ignoreBuildErrors: true,
-    },
-    experimental: {
-        webpackBuildWorker: true,
-        parallelServerBuildTraces: true,
-        parallelServerCompiles: true,
     },
 };
 
