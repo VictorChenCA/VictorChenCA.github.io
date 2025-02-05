@@ -9,7 +9,7 @@ try {
 const nextConfig = {
     output: "export",  // Required for GitHub Pages
     basePath: "",
-    assetPrefix: "./",  // Ensure trailing slash
+    assetPrefix: "/",  // Ensure trailing slash
     images: {
         unoptimized: true,  // Should be at the root level, not under experimental
     },
